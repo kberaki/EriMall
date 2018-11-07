@@ -20,12 +20,13 @@ let thailand = new Images('thailand', './images/thailand.jpeg',' image of thaila
 let london = new Images('london', './images/london.jpeg',' image of london' )
 let Moscow = new Images('Moscow', './images/Moscow.jpg', 'Moscow', 'Image of thunder Moscow')
 let istanbul = new Images('istanbul', './images/istanbul.jpg', 'istanbul', 'Image of thunder istanbul')
+let Asmara = new Images('Asmara', './images/Asmara.jpg', 'Asmara', 'Image of thunder istanbul')
 //let dubai = new Images( 'dubai', '../images/dubai.jpeg', 'dubai', ' image of dubai')
 //let singapore = new Images ('singapore', '../images/singapore.jpg', 'image of singapore' )
 //let thailand = new Images('thailand', '../images/thailand.jpg',' image of thailand' )
 
 
-travelPlaces.push(dubai,istanbul,london, Moscow, paris, singapore, thailand )
+travelPlaces.push(dubai,istanbul,london, Moscow, paris, singapore, thailand,Asmara )
 
 let randomNumber = function(){
   return Math.floor(Math.random()* travelPlaces.length)
@@ -35,16 +36,23 @@ let FirstImage
 let SecondImage
 let ThirdImage
 
+let counter = 0
 let clickHandler = function(event) {
   if(FirstImage._id === event.target.id) {
     FirstImage.clicked++
+    counter++
   } else if(SecondImage._id === event.target.id) {
     SecondImage.clicked++
+    counter++
   } else {
     ThirdImage.clicked++
+    counter++
   }
   displayImages()
-  //displayChart()
+  while(counter===25){
+    displayChart()
+    break
+  } 
 }
 
 
