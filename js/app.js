@@ -12,7 +12,13 @@ function Images (newtitle, Path, id, description) {
   this.clicked = 0
   this.shown = 0
 }
-// instantiating new instances of our image object
+
+if(localStorage.local){
+let parsePlaces = localStorage.getItem('local')
+//   console.log(travelPlaces)
+ travelPlaces = JSON.parse(parsePlaces)
+} else{
+  // instantiating new instances of our image object
 let paris = new Images('paris', './images/paris.jpg', 'paris', 'Image of thunder paris')
 let dubai = new Images( 'dubai', './images/dubai.jpeg', 'dubai', ' image of dubai')
 let singapore = new Images ('singapore', './images/singapore.jpeg', 'image of singapore' )
@@ -25,12 +31,12 @@ let Asmara = new Images('Asmara', './images/Asmara.jpg', 'Asmara', 'Image of thu
 //let singapore = new Images ('singapore', '../images/singapore.jpg', 'image of singapore' )
 //let thailand = new Images('thailand', '../images/thailand.jpg',' image of thailand' )
 
-
 travelPlaces.push(dubai,istanbul,london, Moscow, paris, singapore, thailand,Asmara )
-
+}
 let randomNumber = function(){
   return Math.floor(Math.random()* travelPlaces.length)
 }
+
 
 let FirstImage 
 let SecondImage
@@ -48,12 +54,14 @@ let clickHandler = function(event) {
     ThirdImage.clicked++
     counter++
   }
-  displayImages()
-  while(counter===25){
+  localStorage.setItem('local', JSON.stringify(travelPlaces))
+  
+  if(counter <25){
+    displayImages()
+  } else{ 
     displayChart()
-    break
-  } 
-}
+  }
+} 
 
 
 let displayImages = function() {
@@ -80,17 +88,25 @@ let displayImages = function() {
             
       }
       displayArray=[]
+       
       displayArray.push(FirstImage, SecondImage, ThirdImage)
-      console.log(displayArray)
-      
     }
+  
     elImage.src = randomPlace.filePath
     elImage.setAttribute('id', randomPlace._id)
     randomPlace.shown++
-
     elImage.addEventListener('click', clickHandler)
+     
   }
+
+  
 }
+
 displayImages()
+
+
+
+
+
 
 
